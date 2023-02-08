@@ -1,0 +1,10 @@
+description = "my test"
+
+apply plugin: "kotlin"
+
+dependencies {
+	api(project(":spring-beans"))
+	api(project(":spring-context"))
+	api(project(":spring-core"))
+	api(project(":spring-expression"))
+}
