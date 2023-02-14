@@ -1,19 +1,27 @@
 package com.my.test;
 
-import com.my.test.convert.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Zijian Liao
  * @since 1.0.0
  */
+@Configuration
 public class QuickStart {
 
-
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		UserService userService = context.getBean("userService", UserService.class);
-		userService.test();
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(QuickStart.class);
+		System.out.println(context.getBean("user"));
 	}
 
+	@Bean
+	public User user(){
+		return new User();
+	}
+
+	static class User {
+		String name;
+	}
 }
