@@ -1,36 +1,22 @@
-package com.my.test;
+package com.my.test.dependon;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Zijian Liao
  * @since 1.0.0
  */
+@ComponentScan
 @Configuration
 public class QuickStart {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(QuickStart.class);
-		System.out.println(context.getBean("user"));
+		Object userService = context.getBean("userService");
+		System.out.println(((UserService)userService).orderService);
 	}
 
-	@Bean
-	public User user(){
-		return new User();
-	}
-
-	static class User {
-		String name;
-
-		private Order order;
-
-		public void setOrder(Order order) {
-			this.order = order;
-		}
-	}
-
-	static class Order {
-	}
 }
