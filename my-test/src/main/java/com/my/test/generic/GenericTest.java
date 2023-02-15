@@ -75,7 +75,7 @@ public class GenericTest {
 	}
 
 	@Test
-	public void testGetResource() throws IOException {
+	public void testGetResourceLoader() throws IOException {
 		DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 		Resource resource = resourceLoader.getResource("https://zijiancode.cn");
 		resource = resourceLoader.getResource("classpath:com/my/test/generic/UserService.class");
@@ -85,19 +85,12 @@ public class GenericTest {
 	@Test
 	public void testMetaReader() throws IOException {
 		SimpleMetadataReaderFactory simpleMetadataReaderFactory = new SimpleMetadataReaderFactory();
-
-		// 构造一个MetadataReader
 		MetadataReader metadataReader = simpleMetadataReaderFactory.getMetadataReader("com.my.test.generic.UserService");
-
-		// 得到一个ClassMetadata，并获取了类名
 		ClassMetadata classMetadata = metadataReader.getClassMetadata();
-
-		System.out.println(classMetadata.getClassName());
-
-		// 获取一个AnnotationMetadata，并获取类上的注解信息
+		Assertions.assertEquals("com.my.test.generic.UserService", classMetadata.getClassName());
 		AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
 		for (String annotationType : annotationMetadata.getAnnotationTypes()) {
-			System.out.println(annotationType);
+			Assertions.assertEquals("org.springframework.stereotype.Component", annotationType);
 		}
 	}
 }
